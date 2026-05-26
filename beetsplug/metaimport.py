@@ -536,8 +536,11 @@ class MetaImportPlugin(BeetsPlugin):
         changes: Dict[str, Tuple[object, object]] = {}
 
         for field, value in track_info.items():
-            if value is None:
+            if field in track_info.IGNORED_FIELDS or value is None:
                 continue
+
+            if field in track_info.MEDIA_FIELD_MAP.keys():
+                field = track_info.MEDIA_FIELD_MAP[field]
 
             current = item.get(field)
             if current == value:
