@@ -512,8 +512,10 @@ class MetaImportPlugin(BeetsPlugin):
         changes: Dict[str, Tuple[object, object]] = {}
 
         for field, value in album_info.items():
-            if value is None:
+            if field in album_info.IGNORED_FIELDS or value is None:
                 continue
+            if field in album_info.MEDIA_FIELD_MAP.keys():
+                field = album_info.MEDIA_FIELD_MAP[field]
 
             current = album.get(field)
             if current == value:
