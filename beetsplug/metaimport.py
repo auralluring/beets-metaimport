@@ -442,7 +442,7 @@ class MetaImportPlugin(BeetsPlugin):
     ) -> Tuple[Dict[Item, autotag_hooks.TrackInfo], List[Item], List[autotag_hooks.TrackInfo]]:
         with self._limit_metadata_plugins(plugin):
             mapping, extra_items, extra_tracks = assign_items(items, album_info.tracks)
-        return mapping, extra_items, extra_tracks
+        return dict(mapping), extra_items, extra_tracks
 
     @contextmanager
     def _limit_metadata_plugins(
